@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudioVisuals | Manuel Caro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Override classic blue with deep neon purple for a dark aesthetic
+              blue: {
+                50: '#faf5ff',
+                100: '#f3e8ff',
+                200: '#e9d5ff',
+                300: '#d8b4fe',
+                400: '#c084fc',
+                500: '#a855f7',
+                600: '#9333ea',
+                700: '#7e22ce',
+                800: '#6b21a8',
+                900: '#581c87',
+                950: '#3b0764',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Escalado global optimizado (sin zoom que causa lag) */
+        /* Duplicate html and body removed */
+
+        /* SISTEMA DE BORDES DINÁMICO */
+        /* Cuando el modo es cuadrado, forzamos radio 0 en contenedores */
+        .style-square [class*="rounded-"],
+        .style-square [class*="rounded-["] {
+            border-radius: 0px !important;
+        }
+        
+        /* Excepción para elementos circulares (como perfiles pequeños) */
+        .style-square .keep-round {
+            border-radius: 9999px !important;
+        }
+
+        /* TEMA CLARO */
+        .theme-light {
+            background-color: #f5f5f5 !important;
+            color: #111 !important;
+        }
+        
+        .theme-light .bg-black {
+            background-color: #fff !important;
+        }
+        
+        .theme-light .text-white {
+            color: #111 !important;
+        }
+        
+        .theme-light .text-black {
+            color: #fff !important;
+        }
+
+        .theme-light .bg-white {
+            background-color: #111 !important;
+            color: #fff !important;
+        }
+
+        .theme-light .bg-black {
+            background-color: #fff !important;
+            color: #111 !important;
+        }
+        
+        .theme-light .bg-white\/5 {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+        
+        .theme-light .bg-white\/10 {
+            background-color: rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .theme-light .bg-white\/20 {
+            background-color: rgba(0, 0, 0, 0.2) !important;
+        }
+        
+        .theme-light .border-white\/5 {
+            border-color: rgba(0, 0, 0, 0.05) !important;
+        }
+        
+        .theme-light .border-white\/10 {
+            border-color: rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .theme-light .border-white\/20 {
+            border-color: rgba(0, 0, 0, 0.2) !important;
+        }
+        
+        .theme-light .text-white\/30 {
+            color: rgba(0, 0, 0, 0.4) !important;
+        }
+        
+        .theme-light .text-white\/40 {
+            color: rgba(0, 0, 0, 0.5) !important;
+        }
+        
+        .theme-light .text-white\/50 {
+            color: rgba(0, 0, 0, 0.6) !important;
+        }
+        
+        .theme-light .text-white\/70 {
+            color: rgba(0, 0, 0, 0.8) !important;
+        }
+        
+        .theme-light .hover\:bg-white\/10:hover {
+            background-color: rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .theme-light .hover\:bg-white\/20:hover {
+            background-color: rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .theme-light .hover\:text-white:hover {
+            color: #000 !important;
+        }
+
+        * {
+            user-select: none;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 9px;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+
+        /* BARRAS DE SCROLL MINIMALISTAS */
+        ::-webkit-scrollbar {
+            width: 8px; /* Slightly thicker base for better hit area, but visually we control it via background */
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.08); /* Almost transparent default */
+            border-radius: 9999px; /* Maximum roundness/capsule */
+            border: 2px solid transparent; /* Creates padding around the actual visible thumb */
+            background-clip: padding-box; /* Makes the border act like padding */
+            transition: background 0.3s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3); /* Stronger on hover */
+            border-radius: 9999px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        /* Theme Light exception for scrollbar */
+        .theme-light ::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.1); border: 2px solid transparent; background-clip: padding-box;
+        }
+        .theme-light ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.4); border: 2px solid transparent; background-clip: padding-box;
+        }
+        
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        @keyframes shimmer-text {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .shimmer-text {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            animation: shimmer-text 5s linear infinite;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "framer-motion": "https://esm.sh/framer-motion@^12.28.1",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@^2.39.7"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

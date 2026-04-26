@@ -1,0 +1,28 @@
+ALTER TABLE site_settings
+ADD COLUMN IF NOT EXISTS home_bg TEXT,
+ADD COLUMN IF NOT EXISTS modules_bg TEXT,
+ADD COLUMN IF NOT EXISTS gallery_bg TEXT,
+ADD COLUMN IF NOT EXISTS home_title TEXT,
+ADD COLUMN IF NOT EXISTS about_me_text TEXT,
+ADD COLUMN IF NOT EXISTS about_me_image TEXT,
+ADD COLUMN IF NOT EXISTS border_style TEXT,
+ADD COLUMN IF NOT EXISTS home_blur INTEGER DEFAULT 0,
+ADD COLUMN IF NOT EXISTS home_gray INTEGER DEFAULT 0,
+ADD COLUMN IF NOT EXISTS modules_blur INTEGER DEFAULT 15,
+ADD COLUMN IF NOT EXISTS modules_gray INTEGER DEFAULT 0,
+ADD COLUMN IF NOT EXISTS gallery_blur INTEGER DEFAULT 10,
+ADD COLUMN IF NOT EXISTS gallery_gray INTEGER DEFAULT 0,
+ADD COLUMN IF NOT EXISTS theme TEXT DEFAULT 'dark',
+ADD COLUMN IF NOT EXISTS onboarding_message TEXT,
+ADD COLUMN IF NOT EXISTS home_button_text TEXT,
+ADD COLUMN IF NOT EXISTS home_button_link TEXT,
+ADD COLUMN IF NOT EXISTS custom_link_url TEXT,
+ADD COLUMN IF NOT EXISTS custom_links JSONB;
+
+-- Update drawings table to support drafts
+ALTER TABLE drawings
+DROP CONSTRAINT IF EXISTS drawings_status_check;
+
+ALTER TABLE drawings
+ADD CONSTRAINT drawings_status_check 
+CHECK (status IN ('pending', 'approved', 'rejected', 'draft'));
